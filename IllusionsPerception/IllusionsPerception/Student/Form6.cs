@@ -56,5 +56,34 @@ namespace IllusionsPerception.Student
             nForm.Show();
             this.Hide();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var nForm = new Form10();
+            nForm.FormClosed += (o, ep) => this.Close();
+            nForm.Show();
+            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var nForm = new Form11();
+            nForm.FormClosed += (o, ep) => this.Close();
+            nForm.Show();
+            this.Hide();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var nForm = new Form12();
+            nForm.FormClosed += (o, ep) => this.Close();
+            nForm.Show();
+            this.Hide();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

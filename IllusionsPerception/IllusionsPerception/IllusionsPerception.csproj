@@ -88,6 +88,7 @@
     <Compile Include="Model\Experiment2Result.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PictureModel.cs" />
     <Compile Include="Model\Settings.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -96,6 +97,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student\Form10.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\Form10.Designer.cs">
+      <DependentUpon>Form10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\Form11.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\Form11.Designer.cs">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Student\Form12.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Student\Form12.Designer.cs">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Student\Form3.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,7 +171,17 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Student\Form10.resx">
+      <DependentUpon>Form10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student\Form11.resx">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Student\Form12.resx">
+      <DependentUpon>Form12.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Student\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,9 +234,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\левая.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\правая.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\равны.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
