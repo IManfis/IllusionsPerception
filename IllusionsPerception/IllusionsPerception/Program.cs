@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using IllusionsPerception.Student;
+using IllusionsPerception.Teacher;
 
 namespace IllusionsPerception
 {
@@ -14,7 +15,7 @@ namespace IllusionsPerception
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form2());
+            Application.Run(new Form1());
         }
     }
 }
