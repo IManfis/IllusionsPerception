@@ -26,15 +26,15 @@ namespace IllusionsPerception.Student
             {
                 if (Control.MousePosition.X > 100 + this.DesktopLocation.X && Control.MousePosition.X < 639 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(Control.MousePosition.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(Control.MousePosition.X, 306 + this.DesktopLocation.Y));
                 }
                 else if (Control.MousePosition.X < 102 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
                 }
                 else if (Control.MousePosition.X > 638 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
                 }
 
             }
@@ -52,7 +52,7 @@ namespace IllusionsPerception.Student
 
             if (x < 102)
             {
-                button3.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                button3.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
             }
             else
             {
@@ -67,7 +67,7 @@ namespace IllusionsPerception.Student
 
             if (x > 626)
             {
-                button3.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                button3.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
             }
             else
             {

@@ -43,10 +43,23 @@ namespace IllusionsPerception.Student
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var nForm = new Form8();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            var context = new IllusionsPerceptionContext();
+
+            var count = context.User.Count();
+            var user = context.User.ToList();
+            var id = user[count - 1].Id;
+
+            if (context.Experiment1Result.Any(x => x.Id_User == id))
+            {
+                label3.Visible = true;
+            }
+            else
+            {
+                var nForm = new Form8();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();   
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -67,10 +80,23 @@ namespace IllusionsPerception.Student
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var nForm = new Form11();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            var context = new IllusionsPerceptionContext();
+
+            var count = context.User.Count();
+            var user = context.User.ToList();
+            var id = user[count - 1].Id;
+
+            if (context.Experiment2Result.Any(x => x.Id_User == id))
+            {
+                label4.Visible = true;
+            }
+            else
+            {
+                var nForm = new Form11();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

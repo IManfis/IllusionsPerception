@@ -10,11 +10,25 @@ namespace IllusionsPerception.Student
     {
         private int _number = 1;
         private int _number1 = 1;
+        private bool _continue = false;
+        private int _id = 0;
         public Form8()
         {
             var context = new IllusionsPerceptionContext();
             _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений1").Value);
             InitializeComponent();
+            label3.Text = _number.ToString();
+            label5.Text = _number1.ToString();
+        }
+
+        public Form8(int number, int id)
+        {
+            var context = new IllusionsPerceptionContext();
+            _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений1").Value);
+            InitializeComponent();
+            _number = number;
+            _continue = true;
+            _id = id;
             label3.Text = _number.ToString();
             label5.Text = _number1.ToString();
         }
@@ -33,19 +47,18 @@ namespace IllusionsPerception.Student
             {
                 if (MousePosition.X > 100 + this.DesktopLocation.X && MousePosition.X < 639 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(MousePosition.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(MousePosition.X, 306 + this.DesktopLocation.Y));
                 }
                 else if (MousePosition.X < 102 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
                 }
                 else if (MousePosition.X > 638 + this.DesktopLocation.X)
                 {
-                    c.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                    c.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
                 }
 
             }
-            label6.Text = button3.Location.X.ToString();
         }
 
         private void button3_MouseUp(object sender, MouseEventArgs e)
@@ -60,7 +73,7 @@ namespace IllusionsPerception.Student
 
             if (x < 102)
             {
-                button3.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                button3.Location = this.PointToClient(new Point(103 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
             }
             else
             {
@@ -75,7 +88,7 @@ namespace IllusionsPerception.Student
 
             if (x > 626)
             {
-                button3.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 310 + this.DesktopLocation.Y));
+                button3.Location = this.PointToClient(new Point(636 + this.DesktopLocation.X, 306 + this.DesktopLocation.Y));
             }
             else
             {
@@ -130,7 +143,7 @@ namespace IllusionsPerception.Student
                     NumberDisplay = _number,
                     AllNumberDisplay = _number1
                 });
-                //context.SaveChanges();
+                context.SaveChanges();
                 _number++;
                 if (_number == 31)
                 {
@@ -147,10 +160,20 @@ namespace IllusionsPerception.Student
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var nForm = new Form9();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            if (_continue)
+            {
+                var nForm = new Form17(_id);
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                var nForm = new Form9();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
         }
     }
 }

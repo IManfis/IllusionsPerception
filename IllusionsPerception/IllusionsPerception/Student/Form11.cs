@@ -21,6 +21,8 @@ namespace IllusionsPerception.Student
         private string _rightAnswer = "";
         private string _testeeAnswer = "";
         private int _confidence = 0;
+        private bool _continue = false;
+        private int _id = 0;
         public Form11()
         {
             InitializeComponent();
@@ -28,6 +30,17 @@ namespace IllusionsPerception.Student
             _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений2").Value);
 
             label5.Text = _number1.ToString();
+        }
+
+        public Form11(int number, int id)
+        {
+            var context = new IllusionsPerceptionContext();
+            _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений2").Value);
+
+            label5.Text = _number1.ToString();
+            _number = number;
+            _continue = true;
+            _id = id;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -173,10 +186,20 @@ namespace IllusionsPerception.Student
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var nForm = new Form12();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            if (_continue)
+            {
+                var nForm = new Form17(_id);
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                var nForm = new Form12();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
         }
     }
 }
