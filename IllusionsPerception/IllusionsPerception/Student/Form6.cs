@@ -7,6 +7,7 @@ namespace IllusionsPerception.Student
 {
     public partial class Form6 : Form
     {
+        private int _id = 0;
         public Form6()
         {
             var context = new IllusionsPerceptionContext();
@@ -14,6 +15,7 @@ namespace IllusionsPerception.Student
             var count = context.User.Count();
             var user = context.User.ToList();
             var id = user[count - 1].Id;
+            _id = id;
 
             if (context.Experiment1Result.Any(x => x.Id_User == id))
             {
@@ -64,7 +66,7 @@ namespace IllusionsPerception.Student
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var nForm = new Form9();
+            var nForm = new Form9(_id);
             nForm.FormClosed += (o, ep) => this.Close();
             nForm.Show();
             this.Hide();
@@ -101,7 +103,7 @@ namespace IllusionsPerception.Student
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var nForm = new Form12();
+            var nForm = new Form12(_id);
             nForm.FormClosed += (o, ep) => this.Close();
             nForm.Show();
             this.Hide();
