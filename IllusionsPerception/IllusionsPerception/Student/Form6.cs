@@ -10,8 +10,8 @@ namespace IllusionsPerception.Student
         private int _id = 0;
         public Form6()
         {
-            var context = new IllusionsPerceptionContext();
             InitializeComponent();
+            var context = new IllusionsPerceptionContext();
             var count = context.User.Count();
             var user = context.User.ToList();
             var id = user[count - 1].Id;

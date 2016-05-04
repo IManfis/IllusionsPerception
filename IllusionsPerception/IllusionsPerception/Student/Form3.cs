@@ -23,6 +23,7 @@ namespace IllusionsPerception.Student
         private void button1_Click(object sender, EventArgs e)
         {
             var context = new IllusionsPerceptionContext();
+            label7.Visible = false;
             label4.Visible = false;
             label5.Visible = false;
             var name = textBox1.Text;
@@ -57,7 +58,7 @@ namespace IllusionsPerception.Student
             else
             {
                 context.User.Add(new User { Name = name, Group = groupNumber, Date = DateTime.Now });
-                //context.SaveChanges();
+                context.SaveChanges();
 
                 label4.Visible = true;
                 button3.Visible = true;  
@@ -76,6 +77,17 @@ namespace IllusionsPerception.Student
         {
             if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
                 e.Handled = true;
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            label6.Visible = false;
+            var l = e.KeyChar;
+            if ((l < 'А' || l > 'я') && l != '\b' && l != '.' && l != ' ')
+            {
+                e.Handled = true;
+                label7.Visible = true;
+            }
         }
     }
 }

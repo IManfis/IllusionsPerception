@@ -61,29 +61,34 @@ namespace IllusionsPerception.Student
 
                 if (result.CorrectAnswer == result.TesteeResponse)
                 {
-                    dataGridView1.Rows[row].DefaultCellStyle.BackColor = Color.Green;
+                    dataGridView1.Rows[row].Cells[1].Style.BackColor = Color.Green;
+                    dataGridView1.Rows[row].Cells[2].Style.BackColor = Color.Green;
                 }
                 else
                 {
-                    dataGridView1.Rows[row].DefaultCellStyle.BackColor = Color.Red;
+                    dataGridView1.Rows[row].Cells[1].Style.BackColor = Color.Red;
+                    dataGridView1.Rows[row].Cells[2].Style.BackColor = Color.Red;
                 }
                 row++;
             }
-
-            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];
+            if (dataGridView1.RowCount > 0)
+            {
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var context = new IllusionsPerceptionContext();
+            var user = context.User.FirstOrDefault(x => x.Id == _id);
+
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
             saveFileDialog1.InitialDirectory = "c:\\";
             saveFileDialog1.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog1.FileName = user.Name + " Опыт №2";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
-
-            var context = new IllusionsPerceptionContext();
-            var user = context.User.FirstOrDefault(x => x.Id == _id);
 
             var result = new StringBuilder();
 

@@ -11,9 +11,15 @@ namespace IllusionsPerception.Student
     {
         readonly List<PictureModel> _list = new List<PictureModel>
             {
-                new PictureModel {Patch = "~/../Resources/левая.jpg", Answer = "Левая"},
-                new PictureModel {Patch = "~/../Resources/правая.jpg", Answer = "Правая"},
-                new PictureModel {Patch = "~/../Resources/равны.jpg", Answer = "Равны"}
+                new PictureModel { Coefficient = 1.2, Patch = "~/../Resources/1,2левый.jpg", Answer = "Левая"},
+                new PictureModel { Coefficient = 1.2, Patch = "~/../Resources/1,2правый.jpg", Answer = "Правая"},
+                new PictureModel { Coefficient = 1.4, Patch = "~/../Resources/1,4левый.jpg", Answer = "Левая"},
+                new PictureModel { Coefficient = 1.4, Patch = "~/../Resources/1,4правый.jpg", Answer = "Правая"},
+                new PictureModel { Coefficient = 1.6, Patch = "~/../Resources/1,6левый.jpg", Answer = "Левая"},
+                new PictureModel { Coefficient = 1.6, Patch = "~/../Resources/1,6правый.jpg", Answer = "Правая"},
+                new PictureModel { Coefficient = 1.8, Patch = "~/../Resources/1,8левый.jpg", Answer = "Левая"},
+                new PictureModel { Coefficient = 1.8, Patch = "~/../Resources/1,8правый.jpg", Answer = "Правая"},
+                new PictureModel { Patch = "~/../Resources/равны.jpg", Answer = "Равны"}
             };
 
         private int _number = 1;
@@ -22,21 +28,30 @@ namespace IllusionsPerception.Student
         private string _testeeAnswer = "";
         private int _confidence = 0;
         private bool _continue = false;
+        private double _coefficient = 0;
         private int _id = 0;
+        private int _count1 = 0;
+        private int _count2 = 0;
         public Form11()
         {
             InitializeComponent();
             var context = new IllusionsPerceptionContext();
-            _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений2").Value);
+            _count1 = int.Parse(context.Settings.First(x => x.Name == "Предварительная").Value);
+            _count2 = int.Parse(context.Settings.First(x => x.Name == "Контрольная").Value);
+            _coefficient = double.Parse(context.Settings.FirstOrDefault(x => x.Name == "Коэфициент").Value);
 
+            _number1 = _count1 + _count2;
             label5.Text = _number1.ToString();
         }
 
         public Form11(int number, int id)
         {
             var context = new IllusionsPerceptionContext();
-            _number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений2").Value);
+            _count1 = int.Parse(context.Settings.First(x => x.Name == "Предварительная").Value);
+            _count2 = int.Parse(context.Settings.First(x => x.Name == "Контрольная").Value);
+            _coefficient = double.Parse(context.Settings.FirstOrDefault(x => x.Name == "Коэфициент").Value);
 
+            _number1 = _count1 + _count2;
             label5.Text = _number1.ToString();
             _number = number;
             _continue = true;
@@ -61,10 +76,15 @@ namespace IllusionsPerception.Student
         {
             if (number <= _number1)
             {
-                label3.Text = number.ToString();
-                GetPicture();
+                label3.Text = _number.ToString();
+                var context = new IllusionsPerceptionContext();
+                var exposure = int.Parse(context.Settings.FirstOrDefault(x => x.Name == "Экспозиция").Value);
+                var delay = int.Parse(context.Settings.FirstOrDefault(x => x.Name == "Задержка").Value);
+
+                Thread.Sleep(delay);
+                GetPicture(number);
                 pictureBox1.Update();
-                Thread.Sleep(200);
+                Thread.Sleep(exposure);
                 pictureBox1.Image = null;
                 pictureBox1.Invalidate();
                 ShowAnswerButton();
@@ -75,14 +95,80 @@ namespace IllusionsPerception.Student
             }
         }
 
-        private void GetPicture()
+        private void GetPicture(int number)
         {
-            var random = new Random();
-            var k = random.Next(1, _list.Count + 1);
+            if (number <= _count1)
+            {
+                var random = new Random();
+                var k = random.Next(1, 3);
 
-            pictureBox1.ImageLocation = _list[k - 1].Patch;
-            _rightAnswer = _list[k - 1].Answer;
-            pictureBox1.Load();
+                if (_coefficient == 1.2)
+                {
+                    if (k == 1)
+                    {
+                        pictureBox1.ImageLocation = _list[0].Patch;
+                        _rightAnswer = _list[0].Answer;
+                        pictureBox1.Load();
+                    }
+                    else
+                    {
+                        pictureBox1.ImageLocation = _list[1].Patch;
+                        _rightAnswer = _list[1].Answer;
+                        pictureBox1.Load();
+                    }
+                }
+                if (_coefficient == 1.4)
+                {
+                    if (k == 1)
+                    {
+                        pictureBox1.ImageLocation = _list[2].Patch;
+                        _rightAnswer = _list[2].Answer;
+                        pictureBox1.Load();
+                    }
+                    else
+                    {
+                        pictureBox1.ImageLocation = _list[3].Patch;
+                        _rightAnswer = _list[3].Answer;
+                        pictureBox1.Load();
+                    }
+                }
+                if (_coefficient == 1.6)
+                {
+                    if (k == 1)
+                    {
+                        pictureBox1.ImageLocation = _list[4].Patch;
+                        _rightAnswer = _list[4].Answer;
+                        pictureBox1.Load();
+                    }
+                    else
+                    {
+                        pictureBox1.ImageLocation = _list[5].Patch;
+                        _rightAnswer = _list[5].Answer;
+                        pictureBox1.Load();
+                    }
+                }
+                if (_coefficient == 1.8)
+                {
+                    if (k == 1)
+                    {
+                        pictureBox1.ImageLocation = _list[6].Patch;
+                        _rightAnswer = _list[6].Answer;
+                        pictureBox1.Load();
+                    }
+                    else
+                    {
+                        pictureBox1.ImageLocation = _list[7].Patch;
+                        _rightAnswer = _list[7].Answer;
+                        pictureBox1.Load();
+                    }
+                }   
+            }
+            else
+            {
+                pictureBox1.ImageLocation = _list[8].Patch;
+                _rightAnswer = _list[8].Answer;
+                pictureBox1.Load();
+            }
         }
 
         private void ShowAnswerButton()
@@ -181,7 +267,7 @@ namespace IllusionsPerception.Student
                 NumberDisplay = _number,
                 AllNumberDisplay = _number1
             });
-            //context.SaveChanges();
+            context.SaveChanges();
         }
 
         private void button6_Click(object sender, EventArgs e)

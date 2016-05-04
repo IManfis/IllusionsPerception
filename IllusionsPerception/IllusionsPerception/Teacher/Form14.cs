@@ -30,23 +30,29 @@ namespace IllusionsPerception.Teacher
             var row = 0;
             foreach (var result in data.Where(result => result.Group != null))
             {
-                dataGridView1.Rows.Add();
-                var numberDisplay = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[0];
-                numberDisplay.Value = row + 1;
+                if (result.Name != "admin")
+                {
+                    dataGridView1.Rows.Add();
+                    var numberDisplay = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[0];
+                    numberDisplay.Value = row + 1;
 
-                var providedIncentive = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[1];
-                providedIncentive.Value = result.Name;
+                    var providedIncentive = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[1];
+                    providedIncentive.Value = result.Name;
 
-                var groupNumber = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[2];
-                groupNumber.Value = result.Group;
+                    var groupNumber = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[2];
+                    groupNumber.Value = result.Group;
 
-                var id = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[3];
-                id.Value = result.Id;
+                    var id = (DataGridViewTextBoxCell)dataGridView1.Rows[row].Cells[3];
+                    id.Value = result.Id;
 
-                row++;
+                    row++;   
+                }
             }
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];
+            if (dataGridView1.RowCount > 0)
+            {
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];   
+            }
         }
 
         private void Form14_Activated(object sender, EventArgs e)

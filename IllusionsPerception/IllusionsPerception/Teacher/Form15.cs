@@ -11,6 +11,8 @@ namespace IllusionsPerception.Teacher
         public Form15()
         {
             InitializeComponent();
+            WriteToDataGridView1(2);
+            WriteToDataGridView2(2);
         }
 
         public Form15(int id)
@@ -50,7 +52,10 @@ namespace IllusionsPerception.Teacher
                 row++;
             }
 
-            dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];
+            if (dataGridView1.RowCount > 0)
+            {
+                dataGridView1.CurrentCell = dataGridView1.Rows[dataGridView1.RowCount - 1].Cells[0];   
+            }
         }
 
         private void WriteToDataGridView2(int id)
@@ -77,16 +82,21 @@ namespace IllusionsPerception.Teacher
 
                 if (result.CorrectAnswer == result.TesteeResponse)
                 {
-                    dataGridView2.Rows[row].DefaultCellStyle.BackColor = Color.Green;
+                    dataGridView2.Rows[row].Cells[1].Style.BackColor = Color.Green;
+                    dataGridView2.Rows[row].Cells[2].Style.BackColor = Color.Green;
                 }
                 else
                 {
-                    dataGridView2.Rows[row].DefaultCellStyle.BackColor = Color.Red;
+                    dataGridView2.Rows[row].Cells[1].Style.BackColor = Color.Red;
+                    dataGridView2.Rows[row].Cells[2].Style.BackColor = Color.Red;
                 }
                 row++;
             }
 
-            dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.RowCount - 1].Cells[0];
+            if (dataGridView2.RowCount > 0)
+            {
+                dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.RowCount - 1].Cells[0];
+            }
         }
     }
 }

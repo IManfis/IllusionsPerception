@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using IllusionsPerception.Model;
 
 namespace IllusionsPerception.Student
 {
@@ -9,7 +12,6 @@ namespace IllusionsPerception.Student
         public Form7()
         {
             InitializeComponent();
-            label3.Text = _number.ToString();
         }
 
         bool isDown;
@@ -85,24 +87,27 @@ namespace IllusionsPerception.Student
 
         private void button4_Click(object sender, System.EventArgs e)
         {
-            _number++;
-            if (_number > 5)
-            {
-                button4.Enabled = false;
-                button6.Visible = true;
-            }
-            else
-            {
-                label3.Text = _number.ToString();
-            }
+            button3.Location = new Point(new Random().Next(103, 636), 280);
         }
 
         private void button6_Click(object sender, System.EventArgs e)
         {
-            var nForm = new Form8();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            var context = new IllusionsPerceptionContext();
+            var count = context.User.Count();
+            var user = context.User.ToList();
+            var id = user[count - 1].Id;
+
+            if (context.Experiment1Result.Any(x => x.Id_User == id))
+            {
+                label3.Visible = true;
+            }
+            else
+            {
+                var nForm = new Form8();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();   
+            }
         }
     }
 }

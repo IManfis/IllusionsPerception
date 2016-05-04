@@ -22,5 +22,11 @@ namespace IllusionsPerception
             nForm.Show();
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form17 d = new Form17();
+            d.Show();
+        }
     }
 }

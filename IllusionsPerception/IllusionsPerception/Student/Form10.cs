@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using IllusionsPerception.Model;
@@ -10,9 +11,8 @@ namespace IllusionsPerception.Student
     {
         List<PictureModel> list = new List<PictureModel>
             {
-                new PictureModel {Patch = "~/../Resources/левая.jpg", Answer = "Левая"},
-                new PictureModel {Patch = "~/../Resources/правая.jpg", Answer = "Правая"},
-                new PictureModel {Patch = "~/../Resources/равны.jpg", Answer = "Равны"}
+                new PictureModel {Patch = "~/../Resources/1,2левый.jpg", Answer = "Левая"},
+                new PictureModel {Patch = "~/../Resources/1,2правый.jpg", Answer = "Правая"},
             };
 
         private int _number = 1;
@@ -31,32 +31,29 @@ namespace IllusionsPerception.Student
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Visible = false;
             WorkWithForm(_number);
         }
 
         private void WorkWithForm(int number)
         {
-            if (number <= 5)
-            {
-                label3.Text = number.ToString();
-                GetPicture();
-                pictureBox1.Update();
-                Thread.Sleep(200);
-                pictureBox1.Image = null;
-                pictureBox1.Invalidate();
-                ShowAnswerButton();
-            }
-            else
-            {
-                button6.Visible = true;
-            }    
+            var context = new IllusionsPerceptionContext();
+            var exposure = int.Parse(context.Settings.FirstOrDefault(x => x.Name == "Экспозиция").Value);
+            var delay = int.Parse(context.Settings.FirstOrDefault(x => x.Name == "Задержка").Value);
+
+            Thread.Sleep(delay);
+            GetPicture();
+            pictureBox1.Update();
+            Thread.Sleep(exposure);
+            pictureBox1.Image = null;
+            pictureBox1.Invalidate();
+            ShowAnswerButton();
         }
 
         private void GetPicture()
         {
-            Random random = new Random();
-            int k;
-            k = random.Next(1,list.Count + 1);
+            var random = new Random();
+            var k = random.Next(1,list.Count + 1);
 
             pictureBox1.ImageLocation = list[k - 1].Patch;
             pictureBox1.Load();
@@ -134,10 +131,22 @@ namespace IllusionsPerception.Student
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var nForm = new Form11();
-            nForm.FormClosed += (o, ep) => this.Close();
-            nForm.Show();
-            this.Hide();
+            var context = new IllusionsPerceptionContext();
+            var count = context.User.Count();
+            var user = context.User.ToList();
+            var id = user[count - 1].Id;
+
+            if (context.Experiment2Result.Any(x => x.Id_User == id))
+            {
+                label3.Visible = true;
+            }
+            else
+            {
+                var nForm = new Form11();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
         }
 
     }

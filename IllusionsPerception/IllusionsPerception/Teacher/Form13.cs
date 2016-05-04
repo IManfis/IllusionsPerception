@@ -34,6 +34,13 @@ namespace IllusionsPerception.Teacher
                 nForm.Show();
                 this.Hide();
             }
+            if (radioButton1.Checked)
+            {
+                var nForm = new Form18();
+                nForm.FormClosed += (o, ep) => this.Close();
+                nForm.Show();
+                this.Hide();
+            }
         }
     }
 }

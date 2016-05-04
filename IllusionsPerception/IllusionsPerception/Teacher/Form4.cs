@@ -36,7 +36,7 @@ namespace IllusionsPerception.Teacher
                 textBox1.Text = "";
                 textBox2.Text = "";
             }
-            else if (admin.Password == password && admin.Group == null)
+            else if (admin.Password == password && admin.Group == 0)
             {
                 var nForm = new Form13();
                 nForm.FormClosed += (o, ep) => this.Close();

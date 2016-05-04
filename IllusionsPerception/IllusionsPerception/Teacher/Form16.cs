@@ -22,67 +22,74 @@ namespace IllusionsPerception.Teacher
             this.Hide();
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
-                e.Handled = true;
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
-                e.Handled = true;
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            var number = int.Parse(textBox2.Text);
+            var number = comboBox1.SelectedItem.ToString();
+            var context = new IllusionsPerceptionContext();
+            var model = new Settings() { Id = 1, Name = "Предъявлений1", Value = number };
 
-            if (number < 5 || number > 30)
-            {
-                label17.Visible = true;
-                textBox2.Text = "";
-            }
-            else
-            {
-                var context = new IllusionsPerceptionContext();
-                var model = new Settings() {Id = 1, Name = "Предъявлений1", Value = number.ToString()};
+            context.Entry(model).State = EntityState.Modified;
+            context.SaveChanges();
 
-                context.Entry(model).State = EntityState.Modified;
-                context.SaveChanges();
-
-                WriteInformation();
-                textBox2.Text = "";
-            }
+            WriteInformation();
         }
 
         private void WriteInformation()
         {
             var context = new IllusionsPerceptionContext();
             label12.Text = context.Settings.First(x => x.Name == "Предъявлений1").Value;
-            label13.Text = context.Settings.First(x => x.Name == "Предъявлений2").Value;
+            label13.Text = context.Settings.First(x => x.Name == "Предварительная").Value;
+            label16.Text = context.Settings.First(x => x.Name == "Контрольная").Value;
+            label14.Text = context.Settings.First(x => x.Name == "Экспозиция").Value + " мс.";
+            label18.Text = context.Settings.First(x => x.Name == "Задержка").Value + " мс.";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var number = int.Parse(textBox1.Text);
-            
-            if (number < 5 || number > 30)
-            {
-                label1.Visible = true;
-                textBox2.Text = "";
-            }
-            else
-            {
-                var context = new IllusionsPerceptionContext();
-                var model = new Settings() { Id = 2, Name = "Предъявлений2", Value = number.ToString() };
+            var number = comboBox2.SelectedItem.ToString();
+            var context = new IllusionsPerceptionContext();
+            var model = new Settings() { Id = 2, Name = "Предварительная", Value = number };
 
-                context.Entry(model).State = EntityState.Modified;
-                context.SaveChanges();
+            context.Entry(model).State = EntityState.Modified;
+            context.SaveChanges();
 
-                WriteInformation();
-                textBox1.Text = "";
-            }
+            WriteInformation();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var number = comboBox4.SelectedItem.ToString();
+            var context = new IllusionsPerceptionContext();
+            var model = new Settings() { Id = 4, Name = "Экспозиция", Value = number };
+
+            context.Entry(model).State = EntityState.Modified;
+            context.SaveChanges();
+
+            WriteInformation();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var number = comboBox5.SelectedItem.ToString();
+            var context = new IllusionsPerceptionContext();
+            var model = new Settings() { Id = 5, Name = "Задержка", Value = number };
+
+            context.Entry(model).State = EntityState.Modified;
+            context.SaveChanges();
+
+            WriteInformation();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var number = comboBox3.SelectedItem.ToString();
+            var context = new IllusionsPerceptionContext();
+            var model = new Settings() { Id = 3, Name = "Контрольная", Value = number };
+
+            context.Entry(model).State = EntityState.Modified;
+            context.SaveChanges();
+
+            WriteInformation();
         }
     }
 }
