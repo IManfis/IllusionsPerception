@@ -30,7 +30,9 @@ namespace IllusionsPerception.Student
             var groupNumber = int.Parse(textBox2.Text);
             var user = context.User.ToList();
             var number1 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений1").Value);
-            var number2 = int.Parse(context.Settings.First(x => x.Name == "Предъявлений2").Value);
+            var _count1 = int.Parse(context.Settings.First(x => x.Name == "Предварительная").Value);
+            var _count2 = int.Parse(context.Settings.First(x => x.Name == "Контрольная").Value);
+            var number2 = _count1 + _count2;
 
             if (user.Any(x => x.Name == name &&
                 user.Any(m => m.Group == groupNumber)))

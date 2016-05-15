@@ -256,11 +256,11 @@ namespace IllusionsPerception.Student
 
             var count = context.User.Count();
             var user = context.User.ToList();
-            var id = user[count - 1].Id;
+            _id = user[count - 1].Id;
 
             context.Experiment2Result.Add(new Experiment2Result
             {
-                Id_User = id,
+                Id_User = _id,
                 TesteeResponse = _testeeAnswer,
                 CorrectAnswer = _rightAnswer,
                 Confidence = _confidence,
@@ -281,7 +281,7 @@ namespace IllusionsPerception.Student
             }
             else
             {
-                var nForm = new Form12();
+                var nForm = new Form12(_id);
                 nForm.FormClosed += (o, ep) => this.Close();
                 nForm.Show();
                 this.Hide();

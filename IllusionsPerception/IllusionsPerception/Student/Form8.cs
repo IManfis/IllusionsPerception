@@ -110,7 +110,7 @@ namespace IllusionsPerception.Student
 
             var count = context.User.Count();
             var user = context.User.ToList();
-            var id = user[count - 1].Id;
+            _id = user[count - 1].Id;
 
             if (_number > _number1)
             {
@@ -137,7 +137,7 @@ namespace IllusionsPerception.Student
 
                 context.Experiment1Result.Add(new Experiment1Result
                 {
-                    Id_User = id,
+                    Id_User = _id,
                     AbsoluteValue = absoluteValue,
                     Sign = sign,
                     NumberDisplay = _number,
@@ -145,7 +145,7 @@ namespace IllusionsPerception.Student
                 });
                 context.SaveChanges();
                 _number++;
-                if (_number == 31)
+                if (_number == _number1 + 1)
                 {
                     button4.Enabled = false;
                     button6.Visible = true;
@@ -169,7 +169,7 @@ namespace IllusionsPerception.Student
             }
             else
             {
-                var nForm = new Form9();
+                var nForm = new Form9(_id);
                 nForm.FormClosed += (o, ep) => this.Close();
                 nForm.Show();
                 this.Hide();

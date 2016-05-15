@@ -96,9 +96,9 @@
             this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton1.Location = new System.Drawing.Point(272, 271);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(256, 21);
+            this.radioButton1.Size = new System.Drawing.Size(267, 21);
             this.radioButton1.TabIndex = 19;
-            this.radioButton1.Text = "Настройка коэфициента различия";
+            this.radioButton1.Text = "Настройка коэффициента различия";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // Form13
