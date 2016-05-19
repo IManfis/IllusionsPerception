@@ -46,6 +46,7 @@ namespace IllusionsPerception.Student
 
         public Form11(int number, int id)
         {
+            InitializeComponent();
             var context = new IllusionsPerceptionContext();
             _count1 = int.Parse(context.Settings.First(x => x.Name == "Предварительная").Value);
             _count2 = int.Parse(context.Settings.First(x => x.Name == "Контрольная").Value);
